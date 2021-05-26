@@ -12,6 +12,6 @@ namespace WebApplication1.Models.Television
         public string Name { get; set; }
         [Required]
         public CelebrityOccupation Occupation { get; set; }
-        public virtual FullProfileViewModel Citizen { get; set; }
+        public FullProfileViewModel Citizen { get; set; }
     }
 }

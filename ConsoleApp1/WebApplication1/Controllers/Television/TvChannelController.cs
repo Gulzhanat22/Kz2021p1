@@ -18,8 +18,8 @@ namespace WebApplication1.Controllers.Television
 {
     public class TvChannelController : Controller
     {
-        private TvChannelPresentation _channelPresentation { get; set; }
-        public TvChannelController(TvChannelPresentation channelPresentation)
+        private ITvChannelPresentation _channelPresentation { get; set; }
+        public TvChannelController(ITvChannelPresentation channelPresentation)
         {
             _channelPresentation = channelPresentation;
         }

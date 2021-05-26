@@ -6,24 +6,25 @@ using System.Threading.Tasks;
 using WebApplication1.EfStuff.Model.Television;
 using WebApplication1.EfStuff.Repositoryies.Interface;
 using WebApplication1.EfStuff.Repositoryies.Television;
+using WebApplication1.EfStuff.Repositoryies.Television.Interface;
 using WebApplication1.Models;
 using WebApplication1.Models.Television;
 using WebApplication1.Services;
 
 namespace WebApplication1.Presentation.Television
 {
-    public class TvStaffPresentation
+    public class TvStaffPresentation : ITvStaffPresentation
     {
-        private TvStaffRepository _staffRepository { get; set; }
-        private TvProgrammeStaffRepository _programmeStaffRepository { get; set; }
-        private IMapper _mapper { get; set; }
-        private IUserService _userService { get; set; }
-        private ICitizenRepository _citizenRepository { get; set; }
-        private TvProgrammeRepository _programmeRepository { get; set; }
+        private ITvStaffRepository _staffRepository;
+        private ITvProgrammeStaffRepository _programmeStaffRepository;
+        private IMapper _mapper;
+        private IUserService _userService;
+        private ICitizenRepository _citizenRepository;
+        private ITvProgrammeRepository _programmeRepository;
 
-        public TvStaffPresentation(TvStaffRepository staffRepository, TvProgrammeStaffRepository programmeStaffRepository,
+        public TvStaffPresentation(ITvStaffRepository staffRepository, ITvProgrammeStaffRepository programmeStaffRepository,
                                     IMapper mapper, IUserService userService, ICitizenRepository citizenRepository,
-                                    TvProgrammeRepository programmeRepository)
+                                    ITvProgrammeRepository programmeRepository)
         {
             _staffRepository = staffRepository;
             _programmeStaffRepository = programmeStaffRepository;
@@ -65,7 +66,7 @@ namespace WebApplication1.Presentation.Television
         public List<TvStaffViewModel> GetStaffByChannel()
         {
             var channelName = _userService.GetUser().TvStaff.Channel.Name;
-            var staff= _staffRepository.GetByChannel(channelName).Select(_mapper.Map<TvStaffViewModel>).ToList();
+            var staff = _staffRepository.GetByChannel(channelName).Select(_mapper.Map<TvStaffViewModel>).ToList();
             return staff;
         }
 

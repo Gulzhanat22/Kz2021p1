@@ -5,18 +5,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebApplication1.EfStuff.Model.Television;
 using WebApplication1.EfStuff.Repositoryies.Television;
+using WebApplication1.EfStuff.Repositoryies.Television.Interface;
 using WebApplication1.Models.Television;
 using WebApplication1.Services;
 
 namespace WebApplication1.Presentation.Television
 {
-    public class TvSchedulePresentation
+    public class TvSchedulePresentation : ITvSchedulePresentation
     {
-        private TvScheduleRepository _scheduleRepository { get; set; }
-        public IMapper _mapper { get; set; }
-        public TvProgrammeRepository _programmeRepository { get; set; }
-        public IUserService _userService { get; set; }
-        public TvSchedulePresentation(TvScheduleRepository scheduleRepository, IMapper mapper, TvProgrammeRepository programmeRepository, 
+        private ITvScheduleRepository _scheduleRepository;
+        public IMapper _mapper;
+        public ITvProgrammeRepository _programmeRepository;
+        public IUserService _userService;
+        public TvSchedulePresentation(ITvScheduleRepository scheduleRepository, IMapper mapper, ITvProgrammeRepository programmeRepository,
                                         IUserService userService)
         {
             _scheduleRepository = scheduleRepository;

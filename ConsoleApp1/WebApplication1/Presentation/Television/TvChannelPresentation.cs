@@ -6,20 +6,21 @@ using System.Threading.Tasks;
 using WebApplication1.EfStuff.Model.Television;
 using WebApplication1.EfStuff.Repositoryies.Interface;
 using WebApplication1.EfStuff.Repositoryies.Television;
+using WebApplication1.EfStuff.Repositoryies.Television.Interface;
 using WebApplication1.Models;
 using WebApplication1.Models.Television;
 
 namespace WebApplication1.Presentation.Television
 {
-    public class TvChannelPresentation
+    public class TvChannelPresentation : ITvChannelPresentation
     {
-        private TvChannelRepository _channelRepository { get; set; }
-        private IMapper _mapper { get; set; }
-        private ICitizenRepository _citizenRepository { get; set; }
-        private TvStaffRepository _staffRepository { get; set; }
+        private ITvChannelRepository _channelRepository;
+        private IMapper _mapper;
+        private ICitizenRepository _citizenRepository;
+        private ITvStaffRepository _staffRepository;
 
-        public TvChannelPresentation(TvChannelRepository channelRepository, IMapper mapper, ICitizenRepository citizenRepository,
-                                    TvStaffRepository staffRepository)
+        public TvChannelPresentation(ITvChannelRepository channelRepository, IMapper mapper, ICitizenRepository citizenRepository,
+                                    ITvStaffRepository staffRepository)
         {
             _channelRepository = channelRepository;
             _mapper = mapper;

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApplication1.EfStuff.Model.Television;
+using WebApplication1.EfStuff.Repositoryies.Television.Interface;
 
 namespace WebApplication1.EfStuff.Repositoryies.Television
 {
-    public class TvProgrammeStaffRepository : BaseRepository<TvProgrammeStaff>
+    public class TvProgrammeStaffRepository : BaseRepository<TvProgrammeStaff>, ITvProgrammeStaffRepository
     {
         public TvProgrammeStaffRepository(KzDbContext kzDbContext) : base(kzDbContext)
         {

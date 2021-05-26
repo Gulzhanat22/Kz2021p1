@@ -19,9 +19,9 @@ namespace WebApplication1.Controllers.Television
 {
     public class TvProgrammeController : Controller
     {
-        private TvProgrammePresentation _programmePresentation { get; set; }
+        private ITvProgrammePresentation _programmePresentation { get; set; }
 
-        public TvProgrammeController(TvProgrammePresentation programmePresentation)
+        public TvProgrammeController(ITvProgrammePresentation programmePresentation)
         {
             _programmePresentation = programmePresentation;
         }

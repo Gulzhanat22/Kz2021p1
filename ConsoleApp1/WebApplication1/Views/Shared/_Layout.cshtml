@@ -238,24 +238,19 @@
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a asp-controller="TvProgramme" asp-action="Index" class="dropdown-toggle nav-link text-dark">Television<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a class="dropdown-item nav-link text-dark" asp-controller="TvProgramme" asp-action="Index">Tv Programmes</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item nav-link text-dark" asp-controller="TvChannel" asp-action="Index">Channels</a>
-                            </li>
-                            <li class="divider"></li>
-                        </ul>
+                        <a class="nav-link dropdown-toggle" asp-controller="TvProgramme" asp-action="Index" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Телевидение
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" asp-controller="TvProgramme" asp-action="Index">Tv Programmes</a>
+                            <a class="dropdown-item" asp-controller="TvChannel" asp-action="Index">Channels</a>
+                            @if (userService.IsTvStaff())
+                            {
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" asp-controller="TvStaff" asp-action="Profile">My Job</a>
+                            }
+                        </div>
                     </li>
-
-                    @if (userService.IsTvStaff())
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="TvStaff" asp-action="Profile">My Job</a>
-                        </li>
-                    }
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

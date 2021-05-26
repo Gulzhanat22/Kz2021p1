@@ -16,6 +16,7 @@ using WebApplication1.EfStuff.Model.Television;
 using WebApplication1.EfStuff.Repositoryies;
 using WebApplication1.EfStuff.Repositoryies.Interface;
 using WebApplication1.EfStuff.Repositoryies.Television;
+using WebApplication1.EfStuff.Repositoryies.Television.Interface;
 using WebApplication1.Extensions;
 using WebApplication1.Models;
 using WebApplication1.Models.Education;
@@ -80,6 +81,19 @@ namespace WebApplication1
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<ITripRouteRepository, TripRouteRepository>();
 
+            services.AddScoped<ITvProgrammeRepository, TvProgrammeRepository>();
+            services.AddScoped<ITvChannelRepository, TvChannelRepository>();
+            services.AddScoped<ITvStaffRepository, TvStaffRepository>();
+            services.AddScoped<ITvProgrammeStaffRepository, TvProgrammeStaffRepository>();
+            services.AddScoped<ITvCelebrityRepository, TvCelebrityRepository>();
+            services.AddScoped<ITvProgrammeCelebrityRepository, TvProgrammeCelebrityRepository>();
+            services.AddScoped<ITvScheduleRepository, TvScheduleRepository>();
+            services.AddScoped<ITvProgrammePresentation, TvProgrammePresentation>();
+            services.AddScoped<ITvCelebrityPresentation, TvCelebrityPresentation>();
+            services.AddScoped<ITvChannelPresentation, TvChannelPresentation>();
+            services.AddScoped<ITvSchedulePresentation, TvSchedulePresentation>();
+            services.AddScoped<ITvStaffPresentation, TvStaffPresentation>();
+
 
             services.AddScoped<HCEstablishmentsPresentation>(x =>
                 new HCEstablishmentsPresentation(
@@ -93,45 +107,6 @@ namespace WebApplication1
                     x.GetService<IBallotRepository>(),
                     x.GetService<IUserService>(),
                     x.GetService<IMapper>()));
-
-            services.AddScoped<TvChannelPresentation>(x =>
-                new TvChannelPresentation(
-                    x.GetService<TvChannelRepository>(),
-                    x.GetService<IMapper>(),
-                    x.GetService<ICitizenRepository>(),
-                    x.GetService<TvStaffRepository>()));
-
-            services.AddScoped<TvProgrammePresentation>(x =>
-                new TvProgrammePresentation(
-                    x.GetService<TvProgrammeRepository>(),
-                    x.GetService<IMapper>(),
-                    x.GetService<IUserService>(),
-                    x.GetService<IWebHostEnvironment>()));
-
-            services.AddScoped<TvStaffPresentation>(x =>
-                new TvStaffPresentation(
-                    x.GetService<TvStaffRepository>(),
-                    x.GetService<TvProgrammeStaffRepository>(),
-                    x.GetService<IMapper>(),
-                    x.GetService<IUserService>(),
-                    x.GetService<ICitizenRepository>(),
-                    x.GetService<TvProgrammeRepository>()));
-
-            services.AddScoped<TvSchedulePresentation>(x =>
-                new TvSchedulePresentation(
-                    x.GetService<TvScheduleRepository>(),
-                    x.GetService<IMapper>(),
-                    x.GetService<TvProgrammeRepository>(),
-                    x.GetService<IUserService>()));
-
-            services.AddScoped<TvCelebrityPresentation>(x =>
-                new TvCelebrityPresentation(
-                    x.GetService<IMapper>(),
-                    x.GetService<IUserService>(),
-                    x.GetService<ICitizenRepository>(),
-                    x.GetService<TvCelebrityRepository>(),
-                    x.GetService<TvProgrammeCelebrityRepository>(),
-                    x.GetService<TvProgrammeRepository>()));
 
             services.AddScoped<IBallotRepository>(x =>
                 new BallotRepository(x.GetService<KzDbContext>())

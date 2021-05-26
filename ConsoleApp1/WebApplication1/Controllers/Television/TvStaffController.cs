@@ -20,23 +20,9 @@ namespace WebApplication1.Controllers.Television
 {
     public class TvStaffController : Controller
     {
-        public TvStaffPresentation _staffPresentation { get; set; }
-        private TvStaffRepository _staffRepository { get; set; }
-        private TvProgrammeStaffRepository _programmeStaffRepository { get; set; }
-        private IMapper _mapper { get; set; }
-        private IUserService _userService { get; set; }
-        private ICitizenRepository _citizenRepository { get; set; }
-        private TvProgrammeRepository _programmeRepository { get; set; }
-        public TvStaffController(TvStaffRepository staffRepository, IMapper mapper,
-            IUserService userService, TvProgrammeStaffRepository programmeStaffRepository, ICitizenRepository citizenRepository,
-            TvProgrammeRepository programmeRepository, TvStaffPresentation staffPresentation)
+        public ITvStaffPresentation _staffPresentation { get; set; }
+        public TvStaffController(ITvStaffPresentation staffPresentation)
         {
-            _staffRepository = staffRepository;
-            _mapper = mapper;
-            _userService = userService;
-            _programmeStaffRepository = programmeStaffRepository;
-            _citizenRepository = citizenRepository;
-            _programmeRepository = programmeRepository;
             _staffPresentation = staffPresentation;
         }
 

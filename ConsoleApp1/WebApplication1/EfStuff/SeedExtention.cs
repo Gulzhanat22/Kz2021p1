@@ -7,14 +7,16 @@ using System.Linq;
 using WebApplication1.EfStuff.Model;
 using WebApplication1.EfStuff.Model.Airport;
 using WebApplication1.EfStuff.Model.Firemen;
+using WebApplication1.EfStuff.Model.Television;
 using WebApplication1.EfStuff.Repositoryies.Airport.Intrefaces;
 using WebApplication1.EfStuff.Repositoryies.Interface;
 using WebApplication1.EfStuff.Repositoryies.Interface.FiremanInterface;
 using WebApplication1.EfStuff.Repositoryies.PoliceRepositories.Interfaces;
+using WebApplication1.EfStuff.Repositoryies.Television.Interface;
 
 namespace WebApplication1.EfStuff
 {
-	public static class SeedExtention
+    public static class SeedExtention
     {
         public const string AdminName = "admin";
         public const string FacilityName = "Mediker";
@@ -36,7 +38,7 @@ namespace WebApplication1.EfStuff
 
                 CreateDefaultStudents(scope.ServiceProvider);
 
-                CreateDefaultPupils(scope.ServiceProvider);                
+                CreateDefaultPupils(scope.ServiceProvider);
 
                 CreateDefaultFlights(scope.ServiceProvider);
 
@@ -52,6 +54,9 @@ namespace WebApplication1.EfStuff
                 CreateDefaultFiremanTeams(scope.ServiceProvider);
                 CreateDefaultFiremen(scope.ServiceProvider);
                 CreateDefaultIncidents(scope.ServiceProvider);
+
+                CreateDefaultTvAdmin(scope.ServiceProvider);
+                CreateDefaultTvChannelWithStaffAndProgramme(scope.ServiceProvider);
             }
 
             return host;
@@ -61,14 +66,14 @@ namespace WebApplication1.EfStuff
 
 
         private static void CreateDefaultPolice(IServiceProvider serviceProvider)
-		{
-			IPoliceRepository policeRepository = serviceProvider.GetService<IPoliceRepository>();
+        {
+            IPoliceRepository policeRepository = serviceProvider.GetService<IPoliceRepository>();
             ICitizenRepository citizenRepository = serviceProvider.GetService<ICitizenRepository>();
 
-			if (!policeRepository.GetAllAsIQueryable().Any())
-			{
-				if (citizenRepository.GetByName(SHERIFF) == null)
-				{
+            if (!policeRepository.GetAllAsIQueryable().Any())
+            {
+                if (citizenRepository.GetByName(SHERIFF) == null)
+                {
                     Citizen policeman = new Citizen
                     {
                         Name = SHERIFF,
@@ -78,18 +83,142 @@ namespace WebApplication1.EfStuff
 
                     citizenRepository.Save(policeman);
 
-                    policeRepository.Save(new Policeman { 
+                    policeRepository.Save(new Policeman
+                    {
                         Citizen = policeman,
                         Rank = Rank.Sheriff,
                         StartWork = DateTime.Now,
                         Salary = 2500
                     });
                 }
-			}
-		}
+            }
+        }
 
 
-		private static void CreateDefaultFlights(IServiceProvider serviceProvider)
+        const string TvAdmin = "TvAdmin";
+
+        private static void CreateDefaultTvAdmin(IServiceProvider serviceProvider)
+        {
+            var tvStaffRepository = serviceProvider.GetService<ITvStaffRepository>();
+            var citizenRepository = serviceProvider.GetService<ICitizenRepository>();
+
+            if (!tvStaffRepository.HasTvAdmin())
+            {
+                if (citizenRepository.GetByName(TvAdmin) == null)
+                {
+                    var tvAdmin = new Citizen()
+                    {
+                        Name = TvAdmin,
+                        Password = "123",
+                        Age = 25
+                    };
+
+                    citizenRepository.Save(tvAdmin);
+
+                    TvStaff admin = new TvStaff()
+                    {
+                        Citizen = tvAdmin,
+                        Occupation = Occupation.TvAdmin,
+                        Channel = null
+                    };
+
+                    tvStaffRepository.Save(admin);
+                }
+            }
+        }
+        private static void CreateDefaultTvChannelWithStaffAndProgramme(IServiceProvider serviceProvider)
+        {
+            var tvChannelRepository = serviceProvider.GetService<ITvChannelRepository>();
+            var citizenRepository = serviceProvider.GetService<ICitizenRepository>();
+            var tvStaffRepository = serviceProvider.GetService<ITvStaffRepository>();
+            var programmeRepository = serviceProvider.GetService<ITvProgrammeRepository>();
+            var tvCelebrityRepository = serviceProvider.GetService<ITvCelebrityRepository>();
+            var tvProgrammeCelebrityRepository = serviceProvider.GetService<ITvProgrammeCelebrityRepository>();
+            var tvProgrammeStaffRepository = serviceProvider.GetService<ITvProgrammeStaffRepository>();
+            if (!tvChannelRepository.HasAny())
+            {
+                var channel = new TvChannel()
+                {
+                    Name = "BBC",
+                    WorkingFrom = new DateTime(2015, 7, 20, 18, 30, 25)
+                };
+                tvChannelRepository.Save(channel);
+
+                var tvDirector = new Citizen()
+                {
+                    Name = "BbcDirector",
+                    Age = 40,
+                    Password = "123"
+                };
+                citizenRepository.Save(tvDirector);
+
+                var director = new TvStaff()
+                {
+                    Citizen = tvDirector,
+                    Channel = channel,
+                    Occupation = Occupation.Director
+                };
+                tvStaffRepository.Save(director);
+
+                var tvCastingDirector = new Citizen()
+                {
+                    Name = "BbcCastingDirector",
+                    Age = 37,
+                    Password = "123"
+                };
+                citizenRepository.Save(tvCastingDirector);
+
+                var castingDirector = new TvStaff()
+                {
+                    Citizen = tvCastingDirector,
+                    Channel = channel,
+                    Occupation = Occupation.CastingDirector
+                };
+                tvStaffRepository.Save(castingDirector);
+
+                var tvCelebrity = new Citizen()
+                {
+                    Name = "James Cordon",
+                    Age = 32,
+                    Password = "123"
+                };
+                citizenRepository.Save(tvCelebrity);
+
+                var celebrity = new TvCelebrity()
+                {
+                    Citizen = tvCelebrity,
+                    Occupation = CelebrityOccupation.Presenter
+                };
+                tvCelebrityRepository.Save(celebrity);
+
+                var programme = new TvProgramme()
+                {
+                    Name = "Carpool Karaoke",
+                    Channel = channel,
+                    TypeOfProgramme = TypeOfProgramme.Entertainment,
+                    ContentRating = ContentRating.PG13,
+                    AvatarUrl= "/Image/Television/2105141523_Carpool-Karaoke-418x315.jpg"
+                };
+                programmeRepository.Save(programme);
+
+                var celebrityToProgramme = new TvProgrammeCelebrity()
+                {
+                    Celebrity = celebrity,
+                    Programme = programme
+                };
+                tvProgrammeCelebrityRepository.Save(celebrityToProgramme);
+
+                var staffToProgramme = new TvProgrammeStaff()
+                {
+                    Staff = castingDirector,
+                    Programme = programme
+                };
+                tvProgrammeStaffRepository.Save(staffToProgramme);
+            }
+        }
+
+
+        private static void CreateDefaultFlights(IServiceProvider serviceProvider)
         {
             IFlightsRepository flightsRepository = serviceProvider.GetService<IFlightsRepository>();
             if (!flightsRepository.HasAnyFlights())
@@ -253,8 +382,8 @@ namespace WebApplication1.EfStuff
             var studentRepository = serviceProvider.GetService<IStudentRepository>();
             var certificateRepository = serviceProvider.GetService<ICertificateRepository>();
             var universityRepository = serviceProvider.GetService<IUniversityRepository>();
-            
-            var students = studentRepository.GetAll().Any();          
+
+            var students = studentRepository.GetAll().Any();
 
             if (!students)
             {
@@ -268,7 +397,7 @@ namespace WebApplication1.EfStuff
                 List<int> studentCourseYears = new List<int>() { 3, 4, 3, 4, 2, 2 };
                 List<double> studentGpas = new List<double>() { 4.0, 3.67, 3.3, 2.67, 3.0, 2.3 };
                 List<bool> studentOnGrant = new List<bool>() { true, true, true, false, true, false };
-                List<string> studentEnteredYears = new List<string>() { "08-08-2015", "08-08-2015", "08-08-2014", "08-08-2016", "08-08-2017", "08-08-2018" };                
+                List<string> studentEnteredYears = new List<string>() { "08-08-2015", "08-08-2015", "08-08-2014", "08-08-2016", "08-08-2017", "08-08-2018" };
                 var certificate = certificateRepository.GetCertificateByType("Middle");
                 var university = universityRepository.GetUniversityByName("KazNU");
 
@@ -402,7 +531,7 @@ namespace WebApplication1.EfStuff
 
 
             if (!trucks)
-            {                
+            {
                 for (int i = 0; i < trucknumbers.Count - 2; i++)
                 {
                     FireTruck truck = new FireTruck()
@@ -486,7 +615,7 @@ namespace WebApplication1.EfStuff
                     };
                     firemanRepository.Save(fireman);
                 }
-                var citizen1 = citizenRepository.GetByName(citizens[citizens.Count - 1]);                
+                var citizen1 = citizenRepository.GetByName(citizens[citizens.Count - 1]);
                 Fireman firemanTruckSpecialist = new Fireman()
                 {
                     Role = FireWorkerRole.FireTruckSpecialist,
@@ -512,7 +641,7 @@ namespace WebApplication1.EfStuff
             {
                 for (int i = 0; i < addresses.Count; i++)
                 {
-                   
+
                     var team = firemanTeamRepository.GetByName(teamnames[i % 6]);
                     FireIncident incident = new FireIncident()
                     {
@@ -521,11 +650,11 @@ namespace WebApplication1.EfStuff
                         Date = DateTime.Now.AddDays(-(i * 200)),
                         Reason = reasons[i],
                         Injured = inj[i],
-                        Dead =deads[i],
+                        Dead = deads[i],
                         FiremanTeam = team
                     };
                     fireIncidentRepository.Save(incident);
-                }               
+                }
             }
         }
 

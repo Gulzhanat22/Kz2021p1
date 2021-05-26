@@ -6,26 +6,25 @@ using System.Threading.Tasks;
 using WebApplication1.EfStuff.Model.Television;
 using WebApplication1.EfStuff.Repositoryies.Interface;
 using WebApplication1.EfStuff.Repositoryies.Television;
+using WebApplication1.EfStuff.Repositoryies.Television.Interface;
 using WebApplication1.Models;
 using WebApplication1.Models.Television;
 using WebApplication1.Services;
 
 namespace WebApplication1.Presentation.Television
 {
-    public class TvCelebrityPresentation
+    public class TvCelebrityPresentation : ITvCelebrityPresentation
     {
-        private IMapper _mapper { get; set; }
-        private IUserService _userService { get; set; }
-        private ICitizenRepository _citizenRepository { get; set; }
-        private TvCelebrityRepository _celebrityRepository { get; set; }
-        private TvProgrammeCelebrityRepository _programmeCelebrityRepository { get; set; }
-        private TvProgrammeRepository _programmeRepository { get; set; }
-        public TvCelebrityPresentation(IMapper mapper, IUserService userService, ICitizenRepository citizenRepository,
-                                        TvCelebrityRepository celebrityRepository, TvProgrammeCelebrityRepository programmeCelebrityRepository,
-                                        TvProgrammeRepository programmeRepository)
+        private IMapper _mapper;
+        private ICitizenRepository _citizenRepository;
+        private ITvCelebrityRepository _celebrityRepository;
+        private ITvProgrammeCelebrityRepository _programmeCelebrityRepository;
+        private ITvProgrammeRepository _programmeRepository;
+        public TvCelebrityPresentation(IMapper mapper, ICitizenRepository citizenRepository,
+                                        ITvCelebrityRepository celebrityRepository, ITvProgrammeCelebrityRepository programmeCelebrityRepository,
+                                        ITvProgrammeRepository programmeRepository)
         {
             _mapper = mapper;
-            _userService = userService;
             _citizenRepository = citizenRepository;
             _celebrityRepository = celebrityRepository;
             _programmeCelebrityRepository = programmeCelebrityRepository;

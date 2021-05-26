@@ -8,18 +8,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebApplication1.EfStuff.Model.Television;
 using WebApplication1.EfStuff.Repositoryies.Television;
+using WebApplication1.EfStuff.Repositoryies.Television.Interface;
 using WebApplication1.Models.Television;
 using WebApplication1.Services;
 
 namespace WebApplication1.Presentation.Television
 {
-    public class TvProgrammePresentation
+    public class TvProgrammePresentation : ITvProgrammePresentation
     {
-        private TvProgrammeRepository _programmeRepository { get; set; }
-        private IMapper _mapper { get; set; }
-        private IUserService _userService { get; set; }
-        private IWebHostEnvironment _webHostEnvironment { get; set; }
-        public TvProgrammePresentation(TvProgrammeRepository programmeRepository, IMapper mapper, IUserService userService,
+        private ITvProgrammeRepository _programmeRepository;
+        private IMapper _mapper;
+        private IUserService _userService;
+        private IWebHostEnvironment _webHostEnvironment;
+        public TvProgrammePresentation(ITvProgrammeRepository programmeRepository, IMapper mapper, IUserService userService,
                                         IWebHostEnvironment webHostEnvironment)
         {
             _programmeRepository = programmeRepository;
