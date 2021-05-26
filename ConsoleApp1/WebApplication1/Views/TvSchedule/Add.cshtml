@@ -13,5 +13,5 @@
         @Html.DropDownListFor(model => model.Programme.Id, new SelectList(ViewBag.Programmes, "Id", "Name"))
         @Html.ValidationMessageFor(x => x.Programme)
     </div>
-    <input type="submit" value="Add"/>
+    <input class="btn btn-success" type="submit" value="Add"/>
 </form>

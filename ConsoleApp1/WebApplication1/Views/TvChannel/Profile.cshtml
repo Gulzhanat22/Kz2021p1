@@ -8,11 +8,9 @@
 </div>
 <div>
     @Html.DisplayNameFor(x => x.StaffCount) : @Model.StaffCount
-    <a asp-controller="TvStaff" asp-action="Index" asp-route-channelName="@Model.Name">See</a>
 </div>
 <div>
     @Html.DisplayNameFor(x => x.ProgrammeCount) : @Model.ProgrammeCount
-    <a asp-controller="TvProgramme" asp-action="List" asp-route-channelName="@Model.Name">See</a>
 </div>
 <div>
     <a asp-controller="TvChannel" asp-action="AddDirector" asp-route-channelName="@Model.Name">Add Director</a>
