@@ -1,0 +1,21 @@
+﻿@model WebApplication1.Models.Television.CelebrityNewsViewModel
+<h1>Add Celebrity News</h1>
+
+<form action="/TvCelebrity/AddNews" method="post">
+    <div>
+        Celebrity:
+        @Html.DropDownListFor(x => x.Celebrity.Name, new SelectList(ViewBag.Celebrity, "Name", "Name"))
+        @Html.ValidationMessageFor(model => model.Celebrity, "", new { @class = "text-danger" })
+    </div>
+    <div>
+        Description:
+        @Html.TextAreaFor(x => x.Description)
+        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+    </div>
+    <div>
+        Programme:
+        @Html.DropDownListFor(x => x.Programme.Name, new SelectList(ViewBag.Programme, "Name", "Name"), "Please select")
+        @Html.ValidationMessageFor(model => model.Programme, "", new { @class = "text-danger" })
+    </div>
+    <input class="btn btn-success" type="submit" value="Add" />
+</form>

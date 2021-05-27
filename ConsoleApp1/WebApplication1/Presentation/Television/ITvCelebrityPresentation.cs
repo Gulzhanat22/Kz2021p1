@@ -15,5 +15,7 @@ namespace WebApplication1.Presentation.Television
         TvProgrammeCelebrityViewModel PutCelebrityToProgramme(long id);
         void SavePutCelebrityToProgramme(TvProgrammeCelebrityViewModel viewModel);
         List<TvProgrammeCelebrityViewModel> GetCelebrityByProgramme(string programmeName);
+        List<TvProgrammeShortViewModel> GetTvProgrammesOfChannel();
+        void SaveNews(CelebrityNewsViewModel viewModel);
     }
 }

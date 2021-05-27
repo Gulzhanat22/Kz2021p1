@@ -51,6 +51,7 @@ namespace WebApplication1.EfStuff
         public DbSet<TvChannel> TvChannels { get; set; }
         public DbSet<TvCelebrity> TvCelebrities { get; set; }
         public DbSet<TvProgrammeCelebrity> TvProgrammeCelebrities { get; set; }
+        public DbSet<CelebrityNews> CelebrityNews { get; set; }
 
         public KzDbContext(DbContextOptions options) : base(options) { }
 
@@ -219,6 +220,14 @@ namespace WebApplication1.EfStuff
             modelBuilder.Entity<TvProgrammeCelebrity>()
               .HasOne(x => x.Programme)
               .WithMany(x => x.Celebrities);
+
+            modelBuilder.Entity<CelebrityNews>()
+              .HasOne(x => x.Celebrity)
+              .WithMany(x => x.CelebrityNews);
+
+            modelBuilder.Entity<CelebrityNews>()
+              .HasOne(x => x.Programme)
+              .WithMany(x => x.CelebrityNews);
 
             base.OnModelCreating(modelBuilder);
         }

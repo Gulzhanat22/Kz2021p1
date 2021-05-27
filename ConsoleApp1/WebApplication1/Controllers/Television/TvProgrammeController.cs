@@ -108,7 +108,7 @@ namespace WebApplication1.Controllers.Television
             {
                 return View(viewModel);
             }
-            if (_programmePresentation.NameExistForEdit(viewModel.Name, viewModel.Id))
+            if (_programmePresentation.NameExist(viewModel.Name, viewModel.Id))
             {
                 ViewBag.ErrorMsg = "This name already exists";
                 return View(viewModel);

@@ -236,6 +236,7 @@ namespace WebApplication1
             MapBothSide<TvSchedule, TvScheduleViewModel>(configurationExp);
             MapBothSide<TvProgrammeStaff, TvProgrammeStaffViewModel>(configurationExp);
             MapBothSide<TvProgrammeCelebrity, TvProgrammeCelebrityViewModel>(configurationExp);
+            MapBothSide<CelebrityNews, CelebrityNewsViewModel>(configurationExp);
 
             var config = new MapperConfiguration(configurationExp);
             var mapper = new Mapper(config);

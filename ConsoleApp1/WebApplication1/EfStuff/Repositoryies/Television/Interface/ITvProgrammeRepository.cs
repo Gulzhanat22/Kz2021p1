@@ -11,6 +11,6 @@ namespace WebApplication1.EfStuff.Repositoryies.Television.Interface
         List<TvProgramme> GetByChannel(string channelName);
         TvProgramme GetByName(string programmeName);
         bool CheckIfNameExists(string programmeName);
-        bool CheckIfNameExistsForEdit(string programmeName, long id);
+        bool CheckIfNameExists(string programmeName, long id);
     }
 }

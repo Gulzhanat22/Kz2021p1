@@ -9,7 +9,7 @@
     <div>
         Occupation : @Model.Occupation
     </div>
-    @if (userService.IsTvStaff() && !userService.IsTvAdmin())
+    @if (userService.IsTvStaff() && !userService.IsTvAdmin() && !userService.IsTvDirector())
     {
         <br />
         <h6>For Television staff: </h6>
@@ -57,6 +57,9 @@
         </div>
         <div>
             <a asp-controller="TvCelebrity" asp-action="Add">Add new celebrity</a>
+        </div>
+        <div>
+            <a asp-controller="TvCelebrity" asp-action="AddNews">Add News about Celebrity</a>
         </div>
     }
 </div>

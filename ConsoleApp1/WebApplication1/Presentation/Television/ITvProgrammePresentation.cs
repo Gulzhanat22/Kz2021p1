@@ -14,7 +14,7 @@ namespace WebApplication1.Presentation.Television
         TvProgrammeViewModel GetProfileViewModel(string programmeName);
         Task<string> UploadAvatar(IFormFile avatarFile);
         bool NameExist(string name);
-        bool NameExistForEdit(string name, long id);
+        bool NameExist(string name, long id);
         Task SaveModel(TvProgrammeViewModel viewModel);
         TvProgrammeShortViewModel FindViewModel(long id);
         void Edit(TvProgrammeShortViewModel viewModel);

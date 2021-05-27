@@ -28,7 +28,7 @@ namespace WebApplication1.EfStuff.Repositoryies.Television
             return _dbSet.Any(x => x.Name == programmeName);
         }
 
-        public bool CheckIfNameExistsForEdit(string programmeName, long id)
+        public bool CheckIfNameExists(string programmeName, long id)
         {
             return _dbSet.Any(x => x.Name == programmeName && x.Id != id);
         }

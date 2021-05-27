@@ -19,5 +19,6 @@ namespace WebApplication1.EfStuff.Model.Television
         public virtual TvChannel Channel { get; set; }
 
         public virtual List<TvProgrammeCelebrity> Celebrities { get; set; }
+        public virtual List<CelebrityNews> CelebrityNews { get; set; }
     }
 }

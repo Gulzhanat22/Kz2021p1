@@ -73,9 +73,9 @@ namespace WebApplication1.Presentation.Television
             return _programmeRepository.CheckIfNameExists(name);
         }
 
-        public bool NameExistForEdit(string name, long id)
+        public bool NameExist(string name, long id)
         {
-            return _programmeRepository.CheckIfNameExistsForEdit(name, id);
+            return _programmeRepository.CheckIfNameExists(name, id);
         }
 
         public async Task SaveModel(TvProgrammeViewModel viewModel)

@@ -13,5 +13,6 @@ namespace WebApplication1.EfStuff.Model.Television
         public virtual Citizen Citizen { get; set; }
 
         public virtual List<TvProgrammeCelebrity> Programme { get; set; }
+        public virtual List<CelebrityNews> CelebrityNews { get; set; }
     }
 }

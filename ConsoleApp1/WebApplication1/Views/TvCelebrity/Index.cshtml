@@ -1,10 +1,29 @@
 ﻿@model List<WebApplication1.Models.Television.TvCelebrityViewModel>
 
-@foreach (var celebrity in Model)
-{
-    <div>
-        <img class="avatar" src="@celebrity.Citizen.AvatarUrl"/>
-        Name : @celebrity.Citizen.Name
-        Occupation : @celebrity.Occupation
-    </div>
-}
+<table class="table table-bordered">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Occupation
+        </th>
+        <th>
+            Age
+        </th>
+    </tr>
+    <tr>
+        @foreach (var item in Model)
+        {
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @item.Occupation
+            </td>
+            <td>
+                @item.Citizen.Age
+            </td>
+        }
+    </tr>
+</table>

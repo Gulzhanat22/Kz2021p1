@@ -77,5 +77,24 @@ namespace WebApplication1.Controllers.Television
             var viewModels = _celebrityPresentation.GetCelebrityByProgramme(programmeName);
             return PartialView("_CelebrityListOfProgramme", viewModels);
         }
+
+        [IsTvCastingDirector]
+        [HttpGet]
+        public IActionResult AddNews()
+        {
+            ViewBag.Celebrity = _celebrityPresentation.GetIndexViewModel();
+            ViewBag.Programme = _celebrityPresentation.GetTvProgrammesOfChannel();
+            return View();
+        }
+
+        [IsTvCastingDirector]
+        [HttpPost]
+        public IActionResult AddNews(CelebrityNewsViewModel viewModel)
+        {
+            _celebrityPresentation.SaveNews(viewModel);
+            ViewBag.Celebrity = _celebrityPresentation.GetIndexViewModel();
+            ViewBag.Programme = _celebrityPresentation.GetTvProgrammesOfChannel();
+            return View();
+        }
     }
 }

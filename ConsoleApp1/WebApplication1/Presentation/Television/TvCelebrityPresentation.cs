@@ -20,15 +20,19 @@ namespace WebApplication1.Presentation.Television
         private ITvCelebrityRepository _celebrityRepository;
         private ITvProgrammeCelebrityRepository _programmeCelebrityRepository;
         private ITvProgrammeRepository _programmeRepository;
+        private IUserService _userService;
+        private ICelebrityNewsRepository _celebrityNewsRepository;
         public TvCelebrityPresentation(IMapper mapper, ICitizenRepository citizenRepository,
                                         ITvCelebrityRepository celebrityRepository, ITvProgrammeCelebrityRepository programmeCelebrityRepository,
-                                        ITvProgrammeRepository programmeRepository)
+                                        ITvProgrammeRepository programmeRepository, IUserService userService, ICelebrityNewsRepository celebrityNewsRepository)
         {
             _mapper = mapper;
             _citizenRepository = citizenRepository;
             _celebrityRepository = celebrityRepository;
             _programmeCelebrityRepository = programmeCelebrityRepository;
             _programmeRepository = programmeRepository;
+            _userService = userService;
+            _celebrityNewsRepository = celebrityNewsRepository;
         }
 
         public List<TvCelebrityViewModel> GetIndexViewModel()
@@ -77,5 +81,18 @@ namespace WebApplication1.Presentation.Television
             return _programmeCelebrityRepository.GetByProgrammeName(programmeName).Select(_mapper.Map<TvProgrammeCelebrityViewModel>).ToList();
         }
 
+        public List<TvProgrammeShortViewModel> GetTvProgrammesOfChannel()
+        {
+            var channelName = _userService.GetUser().TvStaff.Channel.Name;
+            return _programmeRepository.GetByChannel(channelName).Select(_mapper.Map<TvProgrammeShortViewModel>).ToList();
+        }
+
+        public void SaveNews(CelebrityNewsViewModel viewModel)
+        {
+            var model = _mapper.Map<CelebrityNews>(viewModel);
+            model.Celebrity = _celebrityRepository.GetByName(viewModel.Celebrity.Name);
+            model.Programme = _programmeRepository.GetByName(viewModel.Programme.Name);
+            _celebrityNewsRepository.Save(model);
+        }
     }
 }
