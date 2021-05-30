@@ -32,6 +32,10 @@
             "Select Type Of Programme")
         @Html.ValidationMessageFor(x => x.TypeOfProgramme)
     </div>
-
+    <div>
+        Duration:
+        @Html.TextBoxFor(x => x.Duration) minutes
+        @Html.ValidationMessageFor(x => x.Duration)
+    </div>
     <input class="btn btn-success" type="submit" value="Edit" />
 </form>

@@ -24,6 +24,9 @@
         <th>
             Type of Programme
         </th>
+        <th>
+            End Time
+        </th>
         <th></th>
         <th></th>
     </tr>
@@ -34,6 +37,7 @@
             <td>@schedule.AiringTime.ToString("HH:mm")</td>
             <td>@schedule.Programme.Name</td>
             <td>@schedule.Programme.TypeOfProgramme</td>
+            <td>@schedule.EndAiringTime.ToString("HH:mm")</td>
             <td><a asp-action="Edit" asp-route-id="@schedule.Id">Edit</a></td>
             <td><input type="button" class="delete-schedule" data-name="@schedule.Id" value="Remove" /></td>
 

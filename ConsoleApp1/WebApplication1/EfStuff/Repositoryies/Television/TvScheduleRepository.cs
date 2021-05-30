@@ -17,5 +17,10 @@ namespace WebApplication1.EfStuff.Repositoryies.Television
         {
             return _dbSet.Where(x => x.Programme.Channel.Name == channelName && x.AiringTime.Date == date.Date).OrderBy(x => x.AiringTime).ToList();
         }
+
+        public bool TimeIsFree(DateTime date)
+        {
+            return !_dbSet.Any(x => x.AiringTime < date && x.EndAiringTime > date);
+        }
     }
 }

@@ -9,5 +9,6 @@ namespace WebApplication1.EfStuff.Repositoryies.Television.Interface
     public interface ITvScheduleRepository : IBaseRepository<TvSchedule>
     {
         List<TvSchedule> GetByChannelAndDate(string channelName, DateTime date);
+        bool TimeIsFree(DateTime date);
     }
 }

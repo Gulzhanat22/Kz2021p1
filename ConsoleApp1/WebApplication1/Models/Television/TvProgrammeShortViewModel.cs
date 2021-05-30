@@ -24,5 +24,7 @@ namespace WebApplication1.Models.Television
 
         [Display(Name = "Avatar")]
         public IFormFile AvatarFile { get; set; }
+        [Display(Name = "Duration")]
+        public int Duration { get; set; }
     }
 }

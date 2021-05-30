@@ -47,7 +47,14 @@ namespace WebApplication1.Controllers.Television
                 return View(viewModel);
             }
 
-            _schedulePresentation.Save(viewModel);
+            if (!_schedulePresentation.TimeIsValid(viewModel))
+            {
+                ViewBag.ErrorMsg = "This time already exists";
+            }
+            else
+            {
+                _schedulePresentation.Save(viewModel);
+            }
             ViewBag.Programmes = _schedulePresentation.GetProgrammesViewModel();
             return View();
         }

@@ -11,6 +11,7 @@ namespace WebApplication1.Models.Television
         public long Id { get; set; }
         [Required]
         public DateTime AiringTime { get; set; }
+        public DateTime EndAiringTime { get; set; }
         public TvProgrammeShortViewModel Programme { get; set; }
     }
 }

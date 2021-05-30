@@ -11,13 +11,11 @@ namespace WebApplication1.EfStuff.Model.Television
         public string Name { get; set; }
         public ContentRating ContentRating { get; set; }
         public TypeOfProgramme TypeOfProgramme { get; set; }
-
         public string AvatarUrl { get; set; }
-
+        public int Duration { get; set; }
         public virtual List<TvSchedule> Schedules { get; set; }
         public virtual List<TvProgrammeStaff> Staff { get; set; }
         public virtual TvChannel Channel { get; set; }
-
         public virtual List<TvProgrammeCelebrity> Celebrities { get; set; }
         public virtual List<CelebrityNews> CelebrityNews { get; set; }
     }

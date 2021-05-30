@@ -23,6 +23,8 @@ namespace WebApplication1.Models.Television
         public string AvatarUrl { get; set; }
         [Required]
         public IFormFile AvatarFile { get; set; }
+        
+        public int Duration { get; set; }
 
         public TvChannelViewModel Channel { get; set; }
 

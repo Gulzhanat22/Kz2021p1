@@ -25,6 +25,11 @@
         @Html.ValidationMessageFor(x => x.TypeOfProgramme)
     </div>
     <div>
+        Duration:
+        @Html.TextBoxFor(x => x.Duration) minutes
+        @Html.ValidationMessageFor(x => x.Duration)
+    </div>
+    <div>
         Avatar:
         <input type="file" name="@nameof(WebApplication1.Models.Television.TvProgrammeViewModel.AvatarFile)" />
         @Html.ValidationMessageFor(x => x.AvatarFile)

@@ -9,6 +9,7 @@ namespace WebApplication1.EfStuff.Model.Television
     public class TvSchedule : BaseModel
     {
         public DateTime AiringTime { get; set; }
+        public DateTime EndAiringTime { get; set; }
         public virtual TvProgramme Programme { get; set; }
     }
 }

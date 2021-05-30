@@ -44,13 +44,24 @@ namespace WebApplication1.Presentation.Television
                 .Select(_mapper.Map<TvProgrammeShortViewModel>).ToList();
             return programmes;
         }
-
-        public void Save(TvScheduleViewModel viewModel)
+        public TvSchedule ConvertToModel(TvScheduleViewModel viewModel)
         {
             var programme = _programmeRepository.Get(viewModel.Programme.Id);
             viewModel.Programme = _mapper.Map<TvProgrammeShortViewModel>(programme);
             var model = _mapper.Map<TvSchedule>(viewModel);
             model.Programme = programme;
+            model.EndAiringTime = viewModel.AiringTime.AddMinutes(viewModel.Programme.Duration);
+            return model;
+        }
+        public bool TimeIsValid(TvScheduleViewModel viewModel)
+        {
+            var model = ConvertToModel(viewModel);
+            return _scheduleRepository.TimeIsFree(model.AiringTime) && _scheduleRepository.TimeIsFree(model.EndAiringTime);
+        }
+
+        public void Save(TvScheduleViewModel viewModel)
+        {
+            var model = ConvertToModel(viewModel);
             _scheduleRepository.Save(model);
         }
 
