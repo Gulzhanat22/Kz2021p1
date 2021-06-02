@@ -36,6 +36,9 @@
             <a asp-controller="TvProgramme" asp-action="List" asp-route-channelName="@Model.Channel.Name">Programmes</a>
         </div>
         <div>
+            <a asp-controller="Translation" asp-action="Index">Translations</a>
+        </div>
+        <div>
             Schedules of @Model.Channel.Name :
             @for (int i = 0; i < 7; i++)
             {

@@ -10,5 +10,6 @@ namespace WebApplication1.EfStuff.Repositoryies.Television.Interface
     {
         List<TvSchedule> GetByChannelAndDate(string channelName, DateTime date);
         bool TimeIsFree(DateTime date);
+        List<TvSchedule> CheckForTranslation(DateTime date1, DateTime date2);
     }
 }

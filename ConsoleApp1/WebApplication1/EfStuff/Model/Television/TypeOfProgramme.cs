@@ -16,6 +16,7 @@ namespace WebApplication1.EfStuff.Model.Television
         Travel = 7,
         Children = 8,
         Show = 9,
-        Entertainment = 10
+        Entertainment = 10,
+        Live = 11
     }
 }

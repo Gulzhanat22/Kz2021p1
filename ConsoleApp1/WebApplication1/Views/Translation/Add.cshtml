@@ -1,0 +1,22 @@
+﻿@model WebApplication1.Models.Television.TranslationViewModel
+
+<h1>Translation</h1>
+
+<form action="/Translation/Add" method="post">
+    <div>
+        Name :
+        @Html.TextBoxFor(x => x.Name)
+        @Html.ValidationMessageFor(x => x.Name)
+    </div>
+    <div>
+        Airing Time :
+        @Html.EditorFor(x => x.AiringTime)
+        @Html.ValidationMessageFor(x => x.AiringTime)
+    </div>
+    <div>
+        Duration :
+        @Html.TextBoxFor(x => x.Duration)
+        @Html.ValidationMessageFor(x => x.Duration)
+    </div>
+    <input class="btn btn-success" type="submit" value="Add" />
+</form>

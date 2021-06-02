@@ -52,6 +52,7 @@ namespace WebApplication1.EfStuff
         public DbSet<TvCelebrity> TvCelebrities { get; set; }
         public DbSet<TvProgrammeCelebrity> TvProgrammeCelebrities { get; set; }
         public DbSet<CelebrityNews> CelebrityNews { get; set; }
+        public DbSet<Translation> Translations { get; set; }
 
         public KzDbContext(DbContextOptions options) : base(options) { }
 

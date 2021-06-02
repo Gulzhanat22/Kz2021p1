@@ -1,0 +1,31 @@
+﻿@model List<WebApplication1.Models.Television.TranslationViewModel>
+
+<div>
+    <a asp-action="Add">Add new translation</a>
+</div>
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Time
+        </th>
+        <th>
+            Duration
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var translation in Model)
+    {
+        <tr class="schedule">
+            <td>@translation.Name</td>
+            <td>@translation.AiringTime</td>
+            <td>@translation.Duration min</td>
+            <td>
+                <a asp-action="AddToSchedule" asp-route-id="@translation.Id">Add to schedule</a>
+            </td>
+        </tr>
+    }
+</table>

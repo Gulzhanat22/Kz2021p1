@@ -88,11 +88,14 @@ namespace WebApplication1
             services.AddScoped<ITvCelebrityRepository, TvCelebrityRepository>();
             services.AddScoped<ITvProgrammeCelebrityRepository, TvProgrammeCelebrityRepository>();
             services.AddScoped<ITvScheduleRepository, TvScheduleRepository>();
+            services.AddScoped<ICelebrityNewsRepository, CelebrityNewsRepository>();
+            services.AddScoped<ITranslationRepository, TranslationRepository>();
             services.AddScoped<ITvProgrammePresentation, TvProgrammePresentation>();
             services.AddScoped<ITvCelebrityPresentation, TvCelebrityPresentation>();
             services.AddScoped<ITvChannelPresentation, TvChannelPresentation>();
             services.AddScoped<ITvSchedulePresentation, TvSchedulePresentation>();
             services.AddScoped<ITvStaffPresentation, TvStaffPresentation>();
+            services.AddScoped<ITranslationPresentation, TranslationPresentation>();
 
 
             services.AddScoped<HCEstablishmentsPresentation>(x =>
@@ -237,6 +240,7 @@ namespace WebApplication1
             MapBothSide<TvProgrammeStaff, TvProgrammeStaffViewModel>(configurationExp);
             MapBothSide<TvProgrammeCelebrity, TvProgrammeCelebrityViewModel>(configurationExp);
             MapBothSide<CelebrityNews, CelebrityNewsViewModel>(configurationExp);
+            MapBothSide<Translation, TranslationViewModel>(configurationExp);
 
             var config = new MapperConfiguration(configurationExp);
             var mapper = new Mapper(config);

@@ -22,5 +22,11 @@ namespace WebApplication1.EfStuff.Repositoryies.Television
         {
             return !_dbSet.Any(x => x.AiringTime < date && x.EndAiringTime > date);
         }
+
+        public List<TvSchedule> CheckForTranslation(DateTime date1, DateTime date2)
+        {
+            return _dbSet.Where(x => x.AiringTime <= date1 && x.EndAiringTime > date1 || (x.AiringTime < date2 && x.EndAiringTime >= date2))
+                .ToList();
+        }
     }
 }
